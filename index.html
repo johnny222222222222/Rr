@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Uma pequena pergunta...</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            min-height: 100vh;
+            background:
+                radial-gradient(circle at top, #350d21 0%, #110910 45%, #08070a 100%);
+            color: #fff;
+            font-family: Arial, Helvetica, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow-x: hidden;
+        }
+
+        .coracao {
+            position: fixed;
+            color: #b72d61;
+            opacity: 0.25;
+            font-size: 22px;
+            animation: flutuar 5s infinite ease-in-out;
+            pointer-events: none;
+        }
+
+        .c1 {
+            left: 10%;
+            top: 20%;
+        }
+
+        .c2 {
+            right: 12%;
+            top: 30%;
+            animation-delay: 1s;
+        }
+
+        .c3 {
+            left: 18%;
+            bottom: 15%;
+            animation-delay: 2s;
+        }
+
+        .c4 {
+            right: 20%;
+            bottom: 20%;
+            animation-delay: 3s;
+        }
+
+        @keyframes flutuar {
+            0%, 100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-15px);
+            }
+        }
+
+        .container {
+            width: 92%;
+            max-width: 520px;
+            text-align: center;
+            padding: 35px 25px;
+        }
+
+        .tela {
+            display: none;
+            animation: aparecer 0.5s ease;
+        }
+
+        .tela.ativa {
+            display: block;
+        }
+
+        @keyframes aparecer {
+            from {
+                opacity: 0;
+                transform: translateY(15px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .iniciais {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 35px;
+        }
+
+        .letra {
+            width: 85px;
+            height: 85px;
+            border-radius: 50%;
+            background: #390c25;
+            border: 2px solid #8e3159;
+            box-shadow:
+                0 0 0 7px rgba(255,255,255,0.05),
+                0 0 25px rgba(190, 30, 95, 0.25);
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            font-family: Georgia, serif;
+            font-style: italic;
+            font-size: 42px;
+        }
+
+        .meio {
+            color: #d64276;
+            font-size: 20px;
+        }
+
+        h1 {
+            font-family: Georgia, serif;
+            font-style: italic;
+            font-size: 34px;
+            font-weight: normal;
+            margin-bottom: 25px;
+        }
+
+        h2 {
+            font-size: 25px;
+            font-weight: normal;
+            margin: 15px 0 28px;
+            line-height: 1.35;
+        }
+
+        p {
+            color: #d8d2d5;
+            line-height: 1.7;
+            font-size: 15px;
+            margin-bottom: 25px;
+        }
+
+        .pequeno {
+            font-size: 13px;
+            color: #91878d;
+            margin-top: 22px;
+        }
+
+        button {
+            border: none;
+            cursor: pointer;
+            color: white;
+            font-size: 14px;
+            padding: 14px 25px;
+            border-radius: 30px;
+            transition: 0.25s;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+        }
+
+        .principal {
+            background: linear-gradient(135deg, #a51d55, #c52c68);
+            box-shadow: 0 8px 25px rgba(180, 25, 90, 0.25);
+        }
+
+        .secundario {
+            background: transparent;
+            border: 1px solid #8d4968;
+            margin-left: 10px;
+        }
+
+        .botoes {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .botoes button {
+            min-width: 130px;
+        }
+
+        .linha {
+            width: 100%;
+            height: 1px;
+            background: linear-gradient(
+                to right,
+                transparent,
+                #6e2847,
+                transparent
+            );
+            margin: 35px 0;
+        }
+
+        .numero {
+            color: #a88d99;
+            font-size: 13px;
+            margin-bottom: 15px;
+        }
+
+        .mensagem {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 18px;
+            padding: 22px;
+            margin-top: 25px;
+        }
+
+        .mensagem p {
+            margin: 0;
+        }
+
+        .premios {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-top: 25px;
+        }
+
+        .premio {
+            width: 100%;
+            background: rgba(255,255,255,0.035);
+            border: 1px solid #75334f;
+            border-radius: 15px;
+            padding: 16px;
+            color: white;
+        }
+
+        .premio:hover {
+            background: #4b122d;
+            border-color: #c0346c;
+        }
+
+        input {
+            width: 100%;
+            margin-top: 20px;
+            padding: 15px 18px;
+            border-radius: 14px;
+            border: 1px solid #75334f;
+            background: rgba(0,0,0,0.25);
+            color: white;
+            outline: none;
+            font-size: 14px;
+        }
+
+        input::placeholder {
+            color: #8e858a;
+        }
+
+        .enviar {
+            margin-top: 12px;
+        }
+
+        .final {
+            font-family: Georgia, serif;
+            font-style: italic;
+            font-size: 38px;
+            color: #ef6f9e;
+            margin-top: 35px;
+        }
+
+        .assinatura {
+            margin-top: 30px;
+            color: #a98e9b;
+            font-size: 13px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="coracao c1">♡</div>
+    <div class="coracao c2">♡</div>
+    <div class="coracao c3">♡</div>
+    <div class="coracao c4">♡</div>
+
+    <main class="container">
+
+        <!-- COMEÇO -->
+        <section class="tela ativa" id="inicio">
+
+            <div class="iniciais">
+                <div class="letra">R</div>
+                <div class="meio">♥</div>
+                <div class="letra">J</div>
+            </div>
+
+            <h1>Uma pequena pergunta...</h1>
+
+            <p>
+                Rakel, só queria te dizer uma coisa:
+                toda vez que eu falo com você,
+                meu dia fica um pouquinho mais leve.
+            </p>
+
+            <p>
+                Então pensei em fazer uma coisinha diferente
+                e ver se você consegue chegar até o final.
+            </p>
+
+            <button class="principal" onclick="proxima('pergunta1')">
+                Começar →
+            </button>
+
+            <div class="linha"></div>
+
+            <p class="pequeno">
+                Fiz isso só pra você.
+            </p>
+
+        </section>
+
+
+        <!-- PERGUNTA 1 -->
+        <section class="tela" id="pergunta1">
+
+            <div class="numero">Pergunta 1/5</div>
+
+            <h2>Rakel...<br>você gosta de mim?</h2>
+
+            <div class="botoes">
+
+                <button class="principal" onclick="proxima('pergunta2')">
+                    Sim ♥
+                </button>
+
+                <button class="secundario" onclick="tentarNovamente()">
+                    Não
+                </button>
+
+            </div>
+
+            <p class="pequeno" id="aviso1"></p>
+
+        </section>
+
+
+        <!-- PERGUNTA 2 -->
+        <section class="tela" id="pergunta2">
+
+            <div class="numero">Pergunta 2/5</div>
+
+            <h2>
+                Você tem certeza<br>
+                da sua resposta?
+            </h2>
+
+            <p>
+                Pensa bem... agora é sério.
+            </p>
+
+            <div class="botoes">
+
+                <button class="principal" onclick="proxima('pergunta3')">
+                    Tenho certeza ♥
+                </button>
+
+                <button class="secundario" onclick="tentarNovamente2()">
+                    Deixa eu pensar...
+                </button>
+
+            </div>
+
+            <p class="pequeno" id="aviso2"></p>
+
+        </section>
+
+
+        <!-- PERGUNTA 3 -->
+        <section class="tela" id="pergunta3">
+
+            <div class="numero">Pergunta 3/5</div>
+
+            <h2>
+                E me diz uma coisa...
+                <br>
+                você gosta de mim pouco ou muito?
+            </h2>
+
+            <div class="botoes">
+
+                <button class="secundario" onclick="proxima('pergunta4')">
+                    Pouco
+                </button>
+
+                <button class="principal" onclick="proxima('pergunta4')">
+                    Muito ♥
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- PERGUNTA 4 -->
+        <section class="tela" id="pergunta4">
+
+            <div class="numero">Pergunta 4/5</div>
+
+            <h2>
+                Se eu falar que também
+                gosto de você...
+                <br><br>
+                qual seria sua reação?
+            </h2>
+
+            <div class="botoes">
+
+                <button class="secundario" onclick="proxima('pergunta5')">
+                    Concordaria pouco
+                </button>
+
+                <button class="principal" onclick="proxima('pergunta5')">
+                    Concordaria muito ♥
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- PERGUNTA 5 -->
+        <section class="tela" id="pergunta5">
+
+            <div class="numero">Pergunta 5/5</div>
+
+            <h2>
+                Agora vamos para a última pergunta...
+            </h2>
+
+            <p>
+                Quero ver se você me conhece mesmo.
+            </p>
+
+            <h2>
+                O que você acha que eu gosto mais?
+            </h2>
+
+            <div class="botoes">
+
+                <button class="secundario" onclick="errou()">
+                    Café
+                </button>
+
+                <button class="secundario" onclick="errou()">
+                    Homem-Aranha
+                </button>
+
+                <button class="principal" onclick="proxima('vitoria')">
+                    Você ♥
+                </button>
+
+            </div>
+
+            <p class="pequeno" id="aviso5"></p>
+
+        </section>
+
+
+        <!-- VITÓRIA -->
+        <section class="tela" id="vitoria">
+
+            <h1>Parabéns, você venceu. ♥</h1>
+
+            <p>
+                Eu sabia que você ia chegar até aqui.
+            </p>
+
+            <div class="mensagem">
+                <p>
+                    Agora que você terminou o quiz,
+                    chegou a melhor parte.
+                </p>
+            </div>
+
+            <h2>
+                Então me diz...
+                <br>
+                qual prêmio você quer ganhar?
+            </h2>
+
+            <div class="premios">
+
+                <button class="premio" onclick="escolherPremio('Um abraço meu')">
+                    Um abraço meu
+                </button>
+
+                <button class="premio" onclick="escolherPremio('Um beijo meu')">
+                    Um beijo meu
+                </button>
+
+                <button class="premio" onclick="escolherPremio('Meu amor, um abraço e um beijo')">
+                    Meu amor, um abraço e um beijo
+                </button>
+
+            </div>
+
+            <input
+                type="text"
+                id="premioPersonalizado"
+                placeholder="Ou escreve aqui o que você quer ganhar..."
+            >
+
+            <button
+                class="principal enviar"
+                onclick="premioEscrito()"
+            >
+                Escolher ♥
+            </button>
+
+        </section>
+
+
+        <!-- FINAL -->
+        <section class="tela" id="final">
+
+            <h1>Prêmio escolhido. ♥</h1>
+
+            <div class="mensagem">
+                <p id="premioFinal"></p>
+            </div>
+
+            <div class="linha"></div>
+
+            <p>
+                E antes de terminar...
+                só mais uma coisinha.
+            </p>
+
+            <div class="final">
+                Eu te amo. ♥
+            </div>
+
+            <p class="assinatura">
+                — J
+            </p>
+
+        </section>
+
+    </main>
+
+
+    <script>
+
+        function proxima(tela) {
+
+            document.querySelectorAll(".tela").forEach(function(elemento) {
+                elemento.classList.remove("ativa");
+            });
+
+            document.getElementById(tela).classList.add("ativa");
+
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth"
+            });
+        }
+
+
+        function tentarNovamente() {
+
+            document.getElementById("aviso1").innerText =
+                "Hmm... tenta de novo. Eu acho que você sabe a resposta. 😌";
+        }
+
+
+        function tentarNovamente2() {
+
+            document.getElementById("aviso2").innerText =
+                "Pode pensar... mas eu ainda quero uma resposta. ♥";
+        }
+
+
+        function errou() {
+
+            document.getElementById("aviso5").innerText =
+                "Errou 😌 tenta de novo...";
+        }
+
+
+        function escolherPremio(premio) {
+
+            document.getElementById("premioFinal").innerText =
+                "Então seu prêmio vai ser: " + premio + ".";
+
+            proxima("final");
+        }
+
+
+        function premioEscrito() {
+
+            let premio =
+                document.getElementById("premioPersonalizado").value.trim();
+
+            if (premio === "") {
+
+                document.getElementById("premioPersonalizado").placeholder =
+                    "Escreve alguma coisa primeiro... ♥";
+
+                return;
+            }
+
+            document.getElementById("premioFinal").innerText =
+                "Então seu prêmio vai ser: " + premio + ".";
+
+            proxima("final");
+        }
+
+    </script>
+
+</body>
+</html>
